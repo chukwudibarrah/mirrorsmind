@@ -293,7 +293,6 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | Geopoint
   | Playlist
-  | Experience
   | Author
   | Slug
   | BlockContent
