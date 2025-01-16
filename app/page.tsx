@@ -25,7 +25,7 @@ export default async function Home() {
     return (
       <main>
         <section className="h-screen w-screen">
-          <div className="h-full w-full flex flex-col justify-center items-center space-y-20">
+          <div className="h-full w-full flex flex-col justify-center items-center space-y-10">
             <div>
               <h1
                 className={`text-[7rem] leading-none md:text-[11rem] text-center ${hadwick.className}`}

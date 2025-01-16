@@ -68,7 +68,7 @@ export default function CommentsSection({
   };
 
   return (
-    <div className="space-y-16 pb-56">
+    <div className="space-y-16">
       <ViewComments
         comments={comments}
         isLoading={isLoading}

@@ -18,9 +18,7 @@ export function useViews(issueId: string, initialViews: number = 0): UseViewsRes
 
     const incrementViews = async () => {
       setIsLoading(true);
-      try {
-        console.log('Attempting to increment views for:', issueId);
-        
+      try {        
         const response = await fetch(`/api/issue/increment-views/${issueId}`, {
           method: 'POST',
           headers: {
@@ -30,7 +28,6 @@ export function useViews(issueId: string, initialViews: number = 0): UseViewsRes
         });
 
         const data = await response.json();
-        console.log('Response:', data);
 
         if (!response.ok) {
           throw new Error(data.message || 'Failed to increment view count');

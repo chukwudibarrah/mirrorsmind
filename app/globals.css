@@ -27,6 +27,10 @@
     @apply prose prose-xl md:prose-2xl max-w-none tracking-wide font-thin uppercase;
   }
 
+  .button-text {
+    @apply prose prose-xl md:prose-2xl max-w-none text-white hover:text-red-500 tracking-wide font-thin uppercase;
+  }
+
   .footer-text {
     @apply prose max-w-none tracking-wide uppercase;
   }
@@ -51,11 +55,11 @@
 
 @layer utilities {
   .main-container {
-    @apply px-5 md:px-24 h-dvh pt-10 pb-56;
+    @apply px-5 md:px-24 pt-10;
   }
 
   .footer-container {
-    @apply px-5 md:px-24 py-10;
+    @apply px-5 md:px-24 py-10 pt-56;
   }
 
 }

@@ -23,7 +23,6 @@ export async function POST(request: NextRequest, { params }: Context) {
     const existingCookie = cookieStore.get(viewKey);
     
     if (existingCookie) {
-      console.log("Already viewed in this session");
       return NextResponse.json({ message: "Already viewed" }, { status: 200 });
     }
 
@@ -33,7 +32,6 @@ export async function POST(request: NextRequest, { params }: Context) {
     );
 
     if (!exists) {
-      console.log("Issue not found:", id);
       return NextResponse.json({ message: "Issue not found" }, { status: 404 });
     }
 
