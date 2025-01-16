@@ -28,7 +28,13 @@ function urlFor(source: SanityImageSource) {
 interface ComicPage {
   _id: string;
   _type: string;
-  pageImage: SanityImageSource;
+  pageImage: {
+    _type: 'image';
+    asset: {
+      _ref: string;
+      _type: 'reference';
+    };
+  };
   caption?: string;
   alt?: string;
 }
