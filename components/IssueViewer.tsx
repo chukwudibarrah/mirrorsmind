@@ -18,6 +18,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { client } from "@/sanity/lib/client";
 import { useViews } from "@/hooks/useViews";
+import { SanityPage } from '@/types/sanity';
 
 const builder = imageUrlBuilder(client);
 
@@ -39,13 +40,23 @@ interface ComicPage {
   alt?: string;
 }
 
+type Page = SanityPage | ComicPage;
+
 interface IssueViewerProps {
   issueId: string;
   coverImageUrl: string;
   title?: string;
   initialViews?: number;
-  pages: ComicPage[];
+  pages: Page[];
   commentsCount?: number;
+}
+
+function isSanityPage(page: Page): page is SanityPage {
+  return 'asset' in page;
+}
+
+function isComicPage(page: Page): page is ComicPage {
+  return 'pageImage' in page;
 }
 
 const IssueViewer: React.FC<IssueViewerProps> = ({
@@ -71,12 +82,27 @@ const IssueViewer: React.FC<IssueViewerProps> = ({
       };
     } else {
       const page = pages[currentPageIndex - 1];
-      return {
-        src: page.pageImage
+
+      let src = "https://via.placeholder.com/1000x1500.jpg"; // Updated placeholder
+      const alt = page.alt || title || `Page ${currentPageIndex}`;
+      let key = `page-${currentPageIndex}`;
+
+      if (isSanityPage(page)) {
+        src = page.asset
+          ? urlFor(page.asset).width(1000).height(1500).url()
+          : src;
+        key = page._key || key;
+      } else if (isComicPage(page)) {
+        src = page.pageImage && page.pageImage.asset
           ? urlFor(page.pageImage).width(1000).height(1500).url()
-          : "https://placehold.co/1000x1500",
-        alt: title || `Page ${currentPageIndex}`,
-        key: page._id,
+          : src;
+        key = page._id || key;
+      }
+
+      return {
+        src,
+        alt,
+        key,
       };
     }
   };

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // app/issue/[slug]/ClientIssuePage.tsx
 
 'use client';
@@ -7,21 +6,7 @@ import React, { useState } from 'react';
 import IssueViewer from '@/components/IssueViewer';
 import CommentsSection from '@/components/CommentsSection';
 import ErrorBoundary from '@/components/ErrorBoundary';
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-
-interface IssuePage {
-  _id: string;
-  _type: string;
-  pageImage: {
-    _type: 'image';
-    asset: {
-      _ref: string;
-      _type: 'reference';
-    };
-  };
-  caption?: string;
-  alt?: string;
-}
+import { SanityPage } from '@/types/sanity';
 
 interface ClientIssuePageProps {
   issueId: string;
@@ -29,7 +14,7 @@ interface ClientIssuePageProps {
   title?: string;
   initialViews?: number;
   initialCommentsCount?: number;
-  pages: IssuePage[];
+  pages: SanityPage[];
 }
 
 const ClientIssuePage: React.FC<ClientIssuePageProps> = ({
