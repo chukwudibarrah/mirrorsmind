@@ -1,10 +1,28 @@
 // components/NavBar.tsx
 
+import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import Link from "next/link";
-import { neuecomic } from "@/styles/fonts";
+import { heroin } from "@/styles/fonts";
 
-export default function NavBar() {
+async function getFirstIssue() {
+  const query = `*[_type == "comic"] | order(releaseDate desc)[0] {
+    _id,
+    title,
+    slug,
+    releaseDate,
+    coverImage,
+    description,
+    author->
+  }`;
+
+  const issue = await client.fetch(query);
+  return issue;
+}
+
+export default async function NavBar() {
+  const post = await getFirstIssue();
+
   return (
     <header className="bg-black">
       <nav>
@@ -20,11 +38,11 @@ export default function NavBar() {
             </Link>
           </div>
           <div
-            className={`flex space-x-8 md:space-x-24 text-gray-200 text-[17px] md:text-xl font-thin uppercase py-16 ${neuecomic.className}`}
+            className={`flex space-x-8 md:space-x-24 py-16 menu-text ${heroin.className}`}
           >
-            <Link href="/comic">Comic</Link>
-            <Link href="/about">About</Link>
-            <Link href="/contact">Contact</Link>
+            <Link href={`/comic/${post?.slug?.current}`} className="menu-text">Comic</Link>
+            <Link href="/about" className="menu-text">About</Link>
+            <Link href="/contact" className="menu-text">Contact</Link>
           </div>
         </div>
       </nav>

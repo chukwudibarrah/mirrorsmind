@@ -13,14 +13,24 @@ import {
   Eye,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { heroin } from "@/styles/fonts";
 import imageUrlBuilder from "@sanity/image-url";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { client } from "@/sanity/lib/client";
 import { useViews } from "@/hooks/useViews";
 
 const builder = imageUrlBuilder(client);
 
-function urlFor(source: any) {
+function urlFor(source: SanityImageSource) {
   return builder.image(source);
+}
+
+interface ComicPage {
+  _id: string;
+  _type: string;
+  pageImage: SanityImageSource;
+  caption?: string;
+  alt?: string;
 }
 
 interface IssueViewerProps {
@@ -28,8 +38,8 @@ interface IssueViewerProps {
   coverImageUrl: string;
   title?: string;
   initialViews?: number;
-  pages: any[];
-  commentsCount?: number; // Updated prop
+  pages: ComicPage[];
+  commentsCount?: number;
 }
 
 const IssueViewer: React.FC<IssueViewerProps> = ({
@@ -113,17 +123,17 @@ const IssueViewer: React.FC<IssueViewerProps> = ({
   const renderViewCount = () => {
     if (error) {
       console.error('View count error:', error);
-      return `${initialViews} Views`;
+      return `${initialViews}`;
     }
     if (isLoading) {
       return <span className="animate-pulse">Loading...</span>;
     }
-    return `${views} Views`;
+    return `${views}`;
   };
 
   return (
     <section
-      className="px-5 md:px-24 pt-10 pb-56 space-y-5"
+      className="px-5 md:px-24 pt-10 pb-24 space-y-5"
       {...swipeHandlers}
     >
       <div className="flex justify-center ">
@@ -175,16 +185,16 @@ const IssueViewer: React.FC<IssueViewerProps> = ({
           </button>
         </div>
         <div className="flex gap-4 justify-center">
-          <div className="flex items-center gap-2">
+          <div className={`flex items-center gap-2 para-text ${heroin.className}`}>
             <MessageCircleMore size={24} strokeWidth={1} />
-            <span>{commentsCount} Comment{commentsCount !== 1 ? 's' : ''}</span>
+            <span className="">{commentsCount}</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className={`flex items-center gap-2 para-text ${heroin.className}`}>
             <Eye size={24} strokeWidth={1} />
             <span>{renderViewCount()}</span>
           </div>
         </div>
-        <div className="text-center">
+        <div className={`text-center para-text ${heroin.className}`}>
           <span>
             Page {currentPageIndex === 0 ? "Cover" : currentPageIndex} of{" "}
             {totalPages - 1}

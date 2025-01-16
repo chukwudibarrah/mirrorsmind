@@ -2,24 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-} */
-
 @layer utilities {
   .h1-heading {
     @apply text-5xl md:text-7xl font-thin uppercase;
@@ -34,11 +16,23 @@ body {
   }
 
   .sub-text {
-    @apply tracking-wide md:text-xl font-light uppercase;
+    @apply tracking-wide md:text-2xl font-black uppercase;
   }
 
   .body-text {
-    @apply prose md:prose-xl tracking-wide prose-img:rounded-xl max-w-none space-y-5 font-thin uppercase;
+    @apply prose md:prose-2xl tracking-wide prose-img:rounded-xl max-w-none space-y-5 font-thin uppercase;
+  }
+
+  .para-text {
+    @apply prose prose-xl md:prose-2xl max-w-none tracking-wide font-thin uppercase;
+  }
+
+  .footer-text {
+    @apply prose max-w-none tracking-wide uppercase;
+  }
+
+  .menu-text {
+    @apply prose prose-xl md:prose-2xl text-white tracking-wide font-thin uppercase no-underline;
   }
 
   /* view */
@@ -58,6 +52,10 @@ body {
 @layer utilities {
   .main-container {
     @apply px-5 md:px-24 h-dvh pt-10 pb-56;
+  }
+
+  .footer-container {
+    @apply px-5 md:px-24 py-10;
   }
 
 }

@@ -1,7 +1,31 @@
-// app/api/comments/route.ts
-
 import { NextResponse } from 'next/server';
 import { writeClient } from '@/sanity/lib/client';
+
+// Define interfaces for the comment structure
+interface SanityReference {
+  _type: 'reference';
+  _ref: string;
+}
+
+interface CommentDocument {
+  _type: 'comment';
+  text: string;
+  name: string;
+  email: string;
+  createdAt: string;
+  issue: SanityReference;
+  parent?: SanityReference;
+}
+
+interface CommentResponse {
+  _id: string;
+  text: string;
+  name: string;
+  createdAt: string;
+  parent?: {
+    _id: string;
+  };
+}
 
 export async function POST(request: Request) {
   try {
@@ -14,7 +38,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const newComment: any = {
+    const newComment: CommentDocument = {
       _type: 'comment',
       text,
       name,
@@ -57,7 +81,7 @@ export async function GET(request: Request) {
       );
     }
 
-    const comments = await writeClient.fetch(
+    const comments: CommentResponse[] = await writeClient.fetch(
       `*[_type == "comment" && issue._ref == $issueId] | order(createdAt asc) {
         _id,
         text,

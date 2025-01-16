@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { hadwick, neuecomic } from "@/styles/fonts";
+import { hadwick, heroin } from "@/styles/fonts";
 import NavBar from "@/components/NavBar";
 import Providers from "@/components/Providers";
 import "./globals.css";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Mirrors Mind",
@@ -16,10 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${hadwick.variable} ${neuecomic.variable}`}>
+      <body className={`${hadwick.variable} ${heroin.variable}`}>
         <Providers>
           <NavBar />
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>

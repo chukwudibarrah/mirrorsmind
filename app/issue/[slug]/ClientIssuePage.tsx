@@ -7,13 +7,25 @@ import IssueViewer from '@/components/IssueViewer';
 import CommentsSection from '@/components/CommentsSection';
 import ErrorBoundary from '@/components/ErrorBoundary';
 
+interface IssuePage {
+  _key?: string;
+  _type?: string;
+  asset?: {
+    _ref: string;
+    _type: string;
+  };
+  caption?: string;
+  alt?: string;
+  url?: string;
+}
+
 interface ClientIssuePageProps {
   issueId: string;
   coverImageUrl: string;
   title?: string;
   initialViews?: number;
   initialCommentsCount?: number;
-  pages: any[];
+  pages: IssuePage[];
 }
 
 const ClientIssuePage: React.FC<ClientIssuePageProps> = ({

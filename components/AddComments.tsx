@@ -3,7 +3,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { neuecomic } from "@/styles/fonts";
+import { heroin } from "@/styles/fonts";
 
 interface AddCommentsProps {
   issueId: string;
@@ -79,7 +79,7 @@ export default function AddComments({
     <div className="flex justify-center m-5">
       <form
         onSubmit={handleSubmit}
-        className={`grid grid-cols-1 lg:w-7/12 border-gray-300 border-[1px] px-3 py-10 ${neuecomic.className}`}
+        className={`grid grid-cols-1 lg:w-7/12 border-gray-300 border-[1px] px-3 py-10 ${heroin.className}`}
       >
         <h2 className="mb-4 h2-heading">
           {parentId ? "Leave a reply" : "Leave a comment"}
@@ -161,7 +161,7 @@ export default function AddComments({
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`bg-red-500 text-white px-4 py-2 rounded hover:bg-red-300 disabled:bg-gray-400 ${neuecomic.className} uppercase md:text-xl font-thin w-[50%] md:w-[30%]`}
+          className={`bg-red-500 text-white px-4 py-2 rounded hover:bg-red-300 disabled:bg-gray-400 ${heroin.className} uppercase md:text-xl font-thin w-[50%] md:w-[30%]`}
         >
           {isSubmitting ? "Submitting..." : "Add Comment"}
         </button>

@@ -1,15 +1,17 @@
-/* eslint-disable @next/next/no-img-element */
 // app/comic/[slug]/page.tsx
+
+/* eslint-disable @next/next/no-img-element */
 import { client } from "@/sanity/lib/client";
 import { notFound } from "next/navigation";
 import imageUrlBuilder from "@sanity/image-url";
 import { ISSUES_QUERY } from "@/sanity/lib/queries";
-import { neuecomic } from "@/styles/fonts";
+import { heroin } from "@/styles/fonts";
 import Link from "next/link";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 const builder = imageUrlBuilder(client);
 
-function urlFor(source: any) {
+function urlFor(source: SanityImageSource) {
   return builder.image(source);
 }
 
@@ -17,10 +19,24 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+interface ComicIssue {
+  title: string;
+  coverImage: SanityImageSource;
+  releaseDate?: string;
+  pages?: Array<unknown>;
+  slug?: {
+    current: string;
+  };
+}
+
+interface QueryResult {
+  issues: ComicIssue[];
+}
+
 export default async function ComicIssue({ params }: Props) {
   const { slug } = await params;
   
-  const result = await client.fetch(ISSUES_QUERY, { slug });
+  const result = await client.fetch<QueryResult>(ISSUES_QUERY, { slug });
 
   if (!result || !result.issues || result.issues.length === 0) {
     return notFound();
@@ -47,7 +63,7 @@ export default async function ComicIssue({ params }: Props) {
           <div>
             <Link href={`/issue/${post?.slug?.current}`}>
               <span>
-                <h1 className={`h1-heading ${neuecomic.className}`}>
+                <h1 className={`h1-heading ${heroin.className}`}>
                   {post.title}
                 </h1>
               </span>
@@ -56,15 +72,15 @@ export default async function ComicIssue({ params }: Props) {
           <div className="">
             {post.releaseDate && (
               <div
-                className={`prose font-thin md:text-2xl uppercase ${neuecomic.className}`}
+                className={`para-text ${heroin.className}`}
               >
-                Release Date: {new Date(post.releaseDate).toLocaleDateString()}
+                <span className="font-black">Release Date:</span> {new Date(post.releaseDate).toLocaleDateString()}
               </div>
             )}
             <div>
               {Array.isArray(post.pages) && post.pages.length > 0 && (
                 <p
-                  className={`prose font-thin md:text-2xl uppercase ${neuecomic.className}`}
+                  className={`para-text ${heroin.className}`}
                 >
                   {post.pages.length} pages available
                 </p>

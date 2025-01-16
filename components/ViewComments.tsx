@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // components/ViewComments.tsx
 
 "use client";
 
 import { useState } from "react";
 import { format } from "date-fns";
-import { neuecomic } from "@/styles/fonts";
+import { heroin } from "@/styles/fonts";
 import AddComments from "./AddComments";
 
 interface Comment {
@@ -89,7 +90,7 @@ export default function ViewComments({
         </div>
         {/* Render reply form if this comment is being replied to */}
         {replyingToId === comment._id && (
-          <div className="ml-8">
+          <div className="">
             <AddComments
               issueId={comment.issueId}
               onCommentAdded={() => onReply(null)}
@@ -113,7 +114,7 @@ export default function ViewComments({
 
   return (
     <div className="flex justify-center">
-      <div className={`lg:w-7/12 px-3 ${neuecomic.className}`}>
+      <div className={`lg:w-7/12 px-3 ${heroin.className}`}>
         <h2 className="mb-4 h2-heading pb-5">Comments</h2>
         {comments.length === 0 ? (
           <p className="sub-text">No comments yet</p>

@@ -5,7 +5,7 @@ export const hadwick = localFont({
   variable: '--hadwick-font'
 });
 
-export const neuecomic = localFont({
-  src: "./fonts/neuecomic.ttf",
-  variable: '--neuecomic-font'
+export const heroin = localFont({
+  src: "./fonts/heroin.woff2",
+  variable: '--heroin-font'
 });
