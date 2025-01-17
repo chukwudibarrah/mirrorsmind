@@ -1,5 +1,5 @@
 import { hadwick, heroin } from "@/styles/fonts";
-import Link from "next/link";
+
 
 export default function Contact() {
   return (
@@ -18,16 +18,6 @@ export default function Contact() {
               I&apos;ll keep you posted on new releases and progress!
             </p>
           </div>
-          <button className="bg-red-500 hover:bg-white border-red-500 border-[1px] hover:shadow-2xl rounded-xl px-2">
-            <Link
-              href="/subscribe"
-              aria-label="Navigate to subscribe"
-              className={`button-text text-white ${heroin.className}`}
-            >
-              {" "}
-              Get updates
-            </Link>
-          </button>
         </div>
       </section>
     </main>

@@ -36,7 +36,11 @@
   }
 
   .menu-text {
-    @apply prose prose-xl md:prose-2xl text-white tracking-wide font-thin uppercase no-underline;
+    @apply text-xl md:text-2xl text-white tracking-wide font-thin uppercase hover:text-red-500 no-underline;
+  }
+  
+  .menu-text.active {
+    @apply text-red-500 !important;
   }
 
   /* view */

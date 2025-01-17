@@ -3,17 +3,11 @@
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import Link from "next/link";
-import { heroin } from "@/styles/fonts";
+import Navlinks from "./Navlinks";
 
 async function getFirstIssue() {
   const query = `*[_type == "comic"] | order(releaseDate desc)[0] {
-    _id,
-    title,
-    slug,
-    releaseDate,
-    coverImage,
-    description,
-    author->
+    slug
   }`;
 
   const issue = await client.fetch(query);
@@ -22,6 +16,12 @@ async function getFirstIssue() {
 
 export default async function NavBar() {
   const post = await getFirstIssue();
+
+  const navLinks = [
+    { href: `/comic/${post?.slug?.current}`, label: "Comic" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
+  ];
 
   return (
     <header className="bg-black">
@@ -37,13 +37,7 @@ export default async function NavBar() {
               />
             </Link>
           </div>
-          <div
-            className={`flex space-x-8 md:space-x-24 py-16 menu-text ${heroin.className}`}
-          >
-            <Link href={`/comic/${post?.slug?.current}`} className="menu-text">Comic</Link>
-            <Link href="/about" className="menu-text">About</Link>
-            <Link href="/contact" className="menu-text">Contact</Link>
-          </div>
+          <Navlinks navLinks={navLinks} />
         </div>
       </nav>
     </header>
