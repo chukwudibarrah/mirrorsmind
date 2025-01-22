@@ -49,7 +49,7 @@ export const issue = defineType({
       of: [
         {
           type: "reference",
-          to: { type: "commentAuthor" },
+          to: { type: "author" },
         }
       ]
     }),
